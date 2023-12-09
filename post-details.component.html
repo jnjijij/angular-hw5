@@ -1,0 +1,11 @@
+<div>
+    <h2>Post Details</h2>
+    <p>Title: {{ post?.title }}</p>
+    <!-- Display more post details here -->
+    <h3>Comments</h3>
+    <ul>
+        <li *ngFor="let comment of comments">
+            {{ comment.body }}
+        </li>
+    </ul>
+</div>
