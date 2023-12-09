@@ -1,30 +1,26 @@
-// post-details.component.ts
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { UserService } from './user.service';
+import { Component } from '@angular/core';
+import { CarService } from './car.service';
+import { Car } from './car'; // Assuming you have a Car interface defined
 
 @Component({
-    selector: 'app-post-details',
-    template: `
-    <div *ngIf="post">
-      <p>Post Details:</p>
-      <p>{{ post.id }} - {{ post.title }}</p>
-      <!-- Додайте інші поля поста -->
-      <div *ngFor="let comment of comments">
-        <p>{{ comment.body }}</p>
-      </div>
-    </div>
-  `,
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
-export class PostDetailsComponent implements OnInit {
-    post: any;
-    comments: any[];
+export class AppComponent {
+  newCar = { make: '', year: 0, price: 0 };
+  cars: Car[] = [];
 
-    constructor(private route: ActivatedRoute, private userService: UserService) {}
+  constructor(private carService: CarService) {}
 
-    ngOnInit() {
-        const postId = this.route.snapshot.params['id'];
-        this.userService.getPostById(postId).subscribe(post => this.post = post);
-        this.userService.getCommentsByPost(postId).subscribe(comments => this.comments = comments);
-    }
+  ngOnInit() {
+    this.carService.getAllCars().subscribe((cars) => (this.cars = cars));
+  }
+
+  addCar() {
+    this.carService.addCar(this.newCar).subscribe((car) => {
+      this.cars.push(car);
+      this.newCar = { make: '', year: 0, price: 0 };
+    });
+  }
 }
