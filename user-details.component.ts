@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from './user.service';
+import { User } from './user.model'; 
 
 @Component({
-    selector: 'app-user-details',
-    templateUrl: './user-details.component.html',
-    styleUrls: ['./user-details.component.css']
+  selector: 'app-user-details',
+  templateUrl: './user-details.component.html',
+  styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent implements OnInit {
-    user: any;
+  user: User;
 
-    constructor(private route: ActivatedRoute, private userService: UserService) { }
+  constructor(private route: ActivatedRoute, private userService: UserService) { }
 
-    ngOnInit() {
-        const userId = this.route.snapshot.paramMap.get('id');
-        this.userService.getUser(userId).subscribe(user => {
-            this.user = user;
-        });
-    }
+  ngOnInit() {
+    const userId = this.route.snapshot.paramMap.get('id');
+    this.userService.getUser(userId).subscribe(user => {
+      this.user = user;
+    });
+  }
 }
