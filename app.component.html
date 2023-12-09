@@ -1,0 +1,17 @@
+// app.component.html
+<div>
+    <label for="carMake">Car Make:</label>
+    <input id="carMake" [(ngModel)]="carMake" placeholder="Enter car make" />
+
+    <label for="carYear">Car Year:</label>
+    <input id="carYear" [(ngModel)]="carYear" placeholder="Enter car year" />
+
+    <label for="carPrice">Car Price:</label>
+    <input id="carPrice" [(ngModel)]="carPrice" placeholder="Enter car price" />
+
+    <button (click)="addCar()">Add Car</button>
+</div>
+
+<div *ngFor="let car of cars">
+    <p>{{ car.make }} - {{ car.year }} - ${{ car.price }}</p>
+</div>
