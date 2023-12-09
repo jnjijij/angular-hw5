@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class CommentService {
-    private apiUrl = 'https://jsonplaceholder.typicode.com';
+  private apiUrl = 'https://jsonplaceholder.typicode.com';
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    getPostComments(postId: string) {
-        return this.http.get<any[]>(`${this.apiUrl}/comments?postId=${postId}`);
-    }
+  getPostComments(postId: string) {
+    return this.http.get<Comment[]>(`${this.apiUrl}/comments?postId=${postId}`);
+  }
 }
